@@ -342,6 +342,3 @@ Built with ❤️ using Next.js, Supabase, and OpenAI.
 | `/api/github` | POST | Index a GitHub repository |
 | `/api/summary` | POST | Generate weekly AI summary |
 
-## License
-
-MIT
