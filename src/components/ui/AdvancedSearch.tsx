@@ -101,10 +101,10 @@ export default function AdvancedSearch({ onResults, onClear }: AdvancedSearchPro
       });
 
       const data = await response.json();
-      
+
       if (data.results) {
         onResults(data.results);
-        
+
         // Save to recent searches
         const newRecent = [searchQuery, ...recentSearches.filter(s => s !== searchQuery)].slice(0, 5);
         setRecentSearches(newRecent);
@@ -166,11 +166,10 @@ export default function AdvancedSearch({ onResults, onClear }: AdvancedSearchPro
           <div className="flex items-center gap-3 mt-2">
             <button
               onClick={() => setUseSemanticSearch(!useSemanticSearch)}
-              className={`flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs transition-all ${
-                useSemanticSearch
-                  ? 'bg-violet-600/20 text-violet-400 border border-violet-500/30'
-                  : 'bg-white/5 text-white/40 hover:text-white/60'
-              }`}
+              className={`flex items-center gap-1.5 px-2 py-1 rounded-lg text-xs transition-all ${useSemanticSearch
+                ? 'bg-violet-600/20 text-violet-400 border border-violet-500/30'
+                : 'bg-white/5 text-white/40 hover:text-white/60'
+                }`}
             >
               <Sparkles className="w-3 h-3" />
               Semantic Search
@@ -179,16 +178,15 @@ export default function AdvancedSearch({ onResults, onClear }: AdvancedSearchPro
         </div>
 
         {/* Type Filters */}
-        <div className="flex gap-1.5 flex-wrap">
+        <div className="flex items-start gap-2">
           {TYPE_FILTERS.map((filter) => (
             <button
               key={filter.value}
               onClick={() => setTypeFilter(filter.value)}
-              className={`px-3 py-2 rounded-lg text-xs font-medium transition-all ${
-                typeFilter === filter.value
-                  ? 'bg-violet-600 text-white'
-                  : 'bg-white/[0.04] text-white/40 hover:text-white/70 border border-white/8'
-              }`}
+              className={`px-3 py-2 rounded-lg text-xs font-medium transition-all ${typeFilter === filter.value
+                ? 'bg-violet-600 text-white'
+                : 'bg-white/[0.04] text-white/40 hover:text-white/70 border border-white/8'
+                }`}
             >
               {filter.label}
             </button>
@@ -196,23 +194,25 @@ export default function AdvancedSearch({ onResults, onClear }: AdvancedSearchPro
         </div>
 
         {/* Search Button */}
-        <button
-          onClick={() => handleSearch()}
-          disabled={isSearching || !query.trim()}
-          className="px-4 py-2 bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white rounded-xl text-sm font-medium transition-all flex items-center gap-2"
-        >
-          {isSearching ? (
-            <>
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              Searching...
-            </>
-          ) : (
-            <>
-              <Search className="w-4 h-4" />
-              Search
-            </>
-          )}
-        </button>
+        <div className="flex items-start justify-center">
+          <button
+            onClick={() => handleSearch()}
+            disabled={isSearching || !query.trim()}
+            className="px-4 py-2 bg-violet-600 hover:bg-violet-500 disabled:opacity-50 text-white rounded-xl text-sm font-medium transition-all flex items-center gap-2"
+          >
+            {isSearching ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Searching...
+              </>
+            ) : (
+              <>
+                <Search className="w-4 h-4" />
+                Search
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Suggestions Dropdown */}
