@@ -1,13 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
-import { createServiceClient } from '@/lib/supabase/server';
 import { generateEmbeddings, summarizeContent } from '@/lib/openai';
 import { fetchUrlContent } from '@/lib/parsers';
 import { chunkText } from '@/lib/utils';
+import supabase from '@/lib/supabase/client';
 
 export async function POST(request: NextRequest) {
   try {
-    const supabase = await createServiceClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
